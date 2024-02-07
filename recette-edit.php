@@ -2,10 +2,10 @@
 if(isset($_GET['id']) && $_GET['id']!=null){
     require('classes/Recette.php');
     $recette = new Recette;
-    $selectId = $recette->selectId('recettes.recette', $_GET['id'], 'recette-index');
+    $selectId = $recette->selectId('recettes.recette', $_GET['id'], 'index');
     extract($selectId);
 }else{
-    header('location:recette-index.php');
+    header('location:index.php');
 }
 isset($_POST['titre'])
 

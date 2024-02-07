@@ -7,42 +7,22 @@ class UMesure extends PDO {
     public string $nom;
     private string $tableName;
     private string $urlPrefix;
+    private array $listeUMesure;
 
     public function __construct(){
         parent::__construct('mysql:host=localhost;dbname=recettes;port=3306;charset=utf8', 'root', 'root');
         $this->tableName = 'recettes.unite_mesure';
         $this->urlPrefix = 'unite-mesure';
+        $this->listeUMesure = $this->select();
     }
 
-    private function getUMesureNames($table, $field = 'id', $order = 'asc'){
-
+    public function getListeUMesure(){
+        return $this->listeUMesure;
     }
 
     public function redirect(){
         require_once('./classes/Utility.php');
         Utility::redirect($this->urlPrefix . '-show.php', $this->UMesureId );
-    }
-
-    public function insert($table, $data){
-
-        $fieldName = implode(', ', array_keys($data));
-        $fieldValue = ':'.implode(', :', array_keys($data));
-
-        $sql = "INSERT INTO $table ($fieldName) VALUES ($fieldValue);";
-        
-        //return $sql;
-
-        $stmt = $this->prepare($sql);
-        foreach($data as $key=>$value){
-            $stmt->bindValue(":$key", $value);
-        }
-        if($stmt->execute()){
-            /* return $this->lastInsertId(); */
-            require_once('./classes/Utility.php');
-            Utility::redirect($this->urlPrefix . '-show.php', $this->lastInsertId());
-        }else{
-            print_r($stmt->errorInfo());
-        }      
     }
 
     public function select(){
