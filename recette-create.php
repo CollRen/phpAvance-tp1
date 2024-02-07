@@ -33,8 +33,42 @@
             <label>Temps de cuisson
                 <input type="text" name="temps_cuisson">
             </label>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Ingrédients</td>
+                        <td>Qté</td>
+                        <td>U. Mesure</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+            <?php require_once('./classes/Ingredient.php'); 
+                $ing = new ingredient;
+                $ing = $ing->getListeIngredients();
+                foreach ($ing as $key =>$value) { $i = 0; ?>
+                <tr>
+                    <td>
+                        <label class="checkbox" for="<?php echo $value['nom'] ?>"><?php echo $value['nom'] ?>
+                            <input type="checkbox" name="checkboxArr[]" value="<?php echo $value['nom'] ?>" />
+                        </label>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+            <?php $i++; } ?>
+            </tbody>
+        </table>
             <input type="submit" class="btn" value="Save">
         </form>
+
+        
+            
+                    
+
+                
+
+
     </div>
 </body>
 </html>

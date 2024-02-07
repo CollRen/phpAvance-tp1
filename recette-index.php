@@ -13,7 +13,7 @@ $select = $recette->select('recette', 'temps_preparation', 'desc');
 </head>
 <body>
 <?php include('./menu.php');?>
-    <h1>Index des recettes</h1>
+    <h1>Vos recettes sont ici!</h1>
     <table>
         <thead>
             <tr>

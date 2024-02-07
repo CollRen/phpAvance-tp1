@@ -86,3 +86,8 @@ input, select {
     border-radius: 30rem;
     gap: .7rem;
 }
+
+.checkbox {
+    display:flex;
+    background-color: rgba(216, 216, 223, 0.382);
+}
