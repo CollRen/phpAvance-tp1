@@ -1,7 +1,7 @@
 <?php
-require_once('classes/CRUD.php');
-$crud = new CRUD;
-$select = $crud->select('client', 'name', 'desc');
+require_once('classes/Recette.php');
+$recette = new Recette;
+$select = $recette->select('client', 'name', 'desc');
 ?>
 <!DOCTYPE html>
 <html lang="en">

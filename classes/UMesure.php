@@ -1,17 +1,16 @@
 <?php
 
-require_once('./classes/CRUD.php');
-class UMesure extends CRUD {
+require('./classes/Recette.php');
+class UMesure {
     private int $UMesureId;
     private string $nom;
     private string $tableName;
     private string $urlPrefix;
 
     public function __construct(){
-        parent::__construct();
         $this->tableName = 'recettes.unite_mesure';
         $this->urlPrefix = 'unite-mesure';
-        $this->UMesureId = $this->insert($this->tableName, $_POST);
+        $this->UMesureId = $Recette->insert($this->tableName, $_POST);
         $this->nom = $this->getNom();
         $this->redirect();
     }

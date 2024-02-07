@@ -1,23 +1,24 @@
 <?php
 require_once('classes/Recette.php');
 $recette = new Recette;
-$select = $recette->select('client', 'name', 'desc');
+$select = $recette->select('recette', 'temps_preparation', 'desc');
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>index UM</title>
+    <title>index Recettes</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <?php include('./menu.php');?>
-    <h1>Index des unités de mesure</h1>
+    <h1>Index des recettes</h1>
     <table>
         <thead>
             <tr>
-                <th>Nom</th>
+                <th>Titre</th>
+                <th>Temps de préparation</th>
             </tr>
         </thead>
         <tbody>
@@ -25,13 +26,14 @@ $select = $recette->select('client', 'name', 'desc');
             foreach($select as $row){
             ?>
             <tr>
-                <td><a href="unite-mesure-show.php?id=<?= $row['id'];?>"><?= $row['nom']?></a></td>
+                <td><a href="recette-show.php?id=<?= $row['id'];?>"><?= $row['titre']?></a></td>
+                <td><a href="recette-show.php?id=<?= $row['id'];?>"><?= $row['temps_preparation']?></a></td>
             </tr>
             <?php
                 }
             ?>
         </tbody>
     </table>
-    <a href="unite-mesure-create.php" class="btn" >Créer une unité de mesure</a>
+    <a href="recette-create.php" class="btn" >Créer une recette</a>
 </body>
 </html>

@@ -1,8 +1,8 @@
 <?php
 if(isset($_GET['id']) && $_GET['id']!=null){
-    require_once('classes/CRUD.php');
-    $crud = new CRUD;
-    $selectId = $crud->selectId('recettes.unite_mesure', $_GET['id'], 'unite-mesure-index');
+    require_once('classes/Recette.php');
+    $recette = new Recette;
+    $selectId = $recette->selectId('recettes.unite_mesure', $_GET['id'], 'unite-mesure-index');
     extract($selectId);
 }else{
     header('location:unite-mesure-index.php');

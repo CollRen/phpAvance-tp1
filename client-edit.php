@@ -1,8 +1,8 @@
 <?php
 if(isset($_GET['id']) && $_GET['id']!=null){
-    require_once('classes/CRUD.php');
-    $crud = new CRUD;
-    $selectId = $crud->selectId('client', $_GET['id'], 'client-index');
+    require_once('classes/Recette.php');
+    $recette = new Recette;
+    $selectId = $recette->selectId('client', $_GET['id'], 'client-index');
     extract($selectId);
 }else{
     header('location:client-index.php');

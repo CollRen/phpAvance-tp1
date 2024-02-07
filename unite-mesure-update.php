@@ -2,9 +2,9 @@
 
 /* print_r($_POST);
 
-require_once('classes/CRUD.php');
-$crud = new CRUD;
-$update = $crud->update('recettes.unite_mesure', $_POST); */
+require_once('classes/Recette.php');
+$recette = new Recette;
+$update = $recette->update('recettes.unite_mesure', $_POST); */
 
 
 $redirectPost = 

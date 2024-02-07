@@ -1,6 +1,6 @@
 <?php
 
 $id = $_POST['id'];
-require_once('classes/CRUD.php');
-$crud = new CRUD;
-$insert = $crud->delete('client', $id, 'client-index');
+require_once('classes/Recette.php');
+$recette = new Recette;
+$insert = $recette->delete('client', $id, 'client-index');
