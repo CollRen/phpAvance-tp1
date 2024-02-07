@@ -77,6 +77,13 @@ class Recette extends PDO {
 
     public function insert($table, $data){
 
+        // array ingrédients: $data["checkboxArr"]
+        print_r($data);
+        echo '<br><br><br>';
+ // Résultat:
+      /*   
+   Array ( [titre] => [description] => [temps_preparation] => [temps_cuisson] => [ingredient_id:5] => 0.5 [ingredient_id:8] => 1.5 [ingredient_id:6] => 0 [ingredient_id:9] => 0 [ingredient_id:10] => 0 [ingredient_id:3] => 0.75 [ingredient_id:4] => 0 [ingredient_id:7] => 0 )
+        */
         $fieldName = implode(', ', array_keys($data));
         $fieldValue = ':'.implode(', :', array_keys($data));
 
@@ -89,12 +96,12 @@ class Recette extends PDO {
             $stmt->bindValue(":$key", $value);
         }
         if($stmt->execute()){
-            /* return $this->lastInsertId(); */
+
             require_once('./classes/Utility.php');
-            Utility::redirect($this->urlPrefix . '-show.php', $this->lastInsertId());
+            Utility::redirect($this->urlPrefix . '-add-ingredients', $this->lastInsertId());
         }else{
             print_r($stmt->errorInfo());
-        }      
+        }  
     }
 
     public function update($table, $data, $field = 'id'){

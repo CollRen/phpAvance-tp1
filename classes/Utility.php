@@ -11,7 +11,7 @@ class Utility {
     }
 
     static public function redirect($url, $insert) {
-        header("location: $url" . "?id=$insert");
+        header("location: $url.php" . "?id=$insert");
     }
     
 

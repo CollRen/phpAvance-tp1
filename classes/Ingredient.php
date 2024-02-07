@@ -1,6 +1,5 @@
 <?php
 
-
 class Ingredient extends PDO {
     public array $listeIngredients;
     private int $ingredientId;
@@ -13,11 +12,6 @@ class Ingredient extends PDO {
         $this->tableName = 'recettes.ingredient';
         $this->urlPrefix = 'ingredient';
         $this->listeIngredients = $this->select();
-    }
-
-    public function setProps($id, $nom){
-        $this->ingredientId = $id;
-        $this->nom = $nom;
     }
 
     public function getListeIngredients(){
