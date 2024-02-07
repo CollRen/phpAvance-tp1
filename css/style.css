@@ -76,3 +76,13 @@ input, select {
     background-color: #db3450;
     color: #fff;
 }
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    margin: 1rem;
+    background-color: rgba(200, 200, 200, 0.97);
+    border-radius: 30rem;
+    gap: .7rem;
+}

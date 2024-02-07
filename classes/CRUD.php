@@ -3,11 +3,17 @@
 class CRUD extends PDO {
 
     public function __construct(){
-        parent::__construct('mysql:host=localhost;dbname=ecommerce;port=3306;charset=utf8', 'root', 'root');
+        parent::__construct('mysql:host=localhost;dbname=recettes;port=3306;charset=utf8', 'root', 'root');
     }
 
     public function select($table, $field = 'id', $order = 'asc'){
         $sql = "SELECT * FROM $table ORDER BY $field $order";
+        $stmt = $this->query($sql);
+        return $stmt->fetchAll();
+    }
+    
+    public function getName($table, $field, $filter){
+        $sql = "SELECT * FROM $table WHERE $field = $filter";
         $stmt = $this->query($sql);
         return $stmt->fetchAll();
     }
@@ -23,6 +29,22 @@ class CRUD extends PDO {
             return $stmt->fetch();
         }else{
             header("location:$url.php");
+            exit;
+        }
+
+    }
+    public function selectFromDB($table, $value){
+        return 'Ceci est mon nom';
+        $sql = "SELECT * FROM $table WHERE id = $value";
+        $stmt = $this->prepare($sql);
+        $stmt->bindValue(":id", $value);
+        $stmt->execute();
+
+        $count = $stmt->rowCount();
+        if($count == 1) {
+            return $stmt->fetch();
+        }else{
+            print_r($stmt->errorInfo());
             exit;
         }
 
