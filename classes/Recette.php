@@ -98,20 +98,20 @@ class Recette extends PDO {
         if($stmt->execute()){
 
             require_once('./classes/Utility.php');
-            Utility::redirect($this->urlPrefix . '-add-ingredients', $this->lastInsertId());
+            Utility::redirect($this->urlPrefix . '-add-ingredient', $this->lastInsertId());
         }else{
             print_r($stmt->errorInfo());
         }  
     }
 
     public function update($table, $data, $field = 'id'){
-
-
         $fieldName = null;
         foreach($data as $key=>$value){
             $fieldName .= "$key = :$key, ";
         }
+        
         $fieldName = rtrim($fieldName, ', ');
+        print_r($fieldName);
 
         $sql = "UPDATE $table SET $fieldName WHERE $field = :$field;";
         

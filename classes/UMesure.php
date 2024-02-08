@@ -17,7 +17,7 @@ class UMesure extends PDO {
     }
 
     public function getListeUMesure(){
-        return $this->listeUMesure;
+        return $this->select();
     }
 
     public function redirect(){

@@ -1,7 +1,7 @@
 
 <?php
 /* if(isset($_GET['id']) && $_GET['id']!=null){
-    require('classes/Recette.php');
+    require_once('classes/Recette.php');
     $recette = new Recette;
     $selectId = $recette->selectId('recettes.recette', $_GET['id'], 'index');
     extract($selectId);
@@ -31,10 +31,12 @@ $url = 'index'; */
 </head>
 <body>
 <?php include('./menu.php');?>
+
     <div class="container">
-        <h2>Recette add ingredients Create</h2>
+        <h2>Recette add ingredient Create</h2>
+
         <form action="<?php $action  ?>" method="post">
-        <table>
+            <table>
                 <thead>
                     <tr>
                         <td>Ingrédients</td>
@@ -42,36 +44,35 @@ $url = 'index'; */
                         <td>U. Mesure</td>
                     </tr>
                 </thead>
+
                 <tbody>
-                    
-                    <?php require('./classes/Ingredient.php'); 
-                    $ing = new ingredient;
-                    $ing = $ing->getListeIngredients();
-                    $i = 0;
-                    foreach ($ing as $key =>$value) { ?>
                     <tr>
+                        <?php require_once('./classes/Ingredient.php'); 
+                        $ing = new ingredient;
+                        $ing = $ing->getListeingredient(); 
+                        foreach ($ing as $row) { ?>
+
                         <td>
-                            <?php echo $value['nom'] ?>
+                            <?php echo $row['nom']; ?>
                         </td>
 
                         <td>
-                            <input max="10" min="" name="<?php echo 'ingredient_id:' . $value['id'] ?>" step=".25" type="number" value="0" />
+                            <input max="10" min="0" name="qte[]" step=".25" type="number" value="0" />
                         </td>
                         
                         <td>
-                            <select
+                            <select name="UMesure[]">
+                                <?php require_once('./classes/UMesure.php'); 
+                                $Umesure = new UMesure;
+                                $Umesure = $Umesure->getListeUMesure();
+                                foreach ($Umesure as $row) { ?>
                                 
-                                <?php require('./classes/UMesure.php'); 
-                                $Umes = new UMesure;
-                                $Umes = $Umes->getListeUMesure();
-                                foreach ($Umes as $key =>$value) { ?>
-
-                                    name="<?php echo $value['nom'] . $i ?>">
-                                        <option value="<?php echo $value['nom'] ?>"><?php echo $value['nom'] ?></option>
-                                    <?php } ?>
+                                    <option value="<?php echo $row['id']; ?>"><?php echo $row['nom']; ?></option>
+                                
+                                <?php } ?>
                             </select>
                         </td>
-                    </tr><?php $i++; } ?>
+                    </tr><?php } ?>
                 </tbody>
             </table>
             <input type="submit" class="btn" value="Save">

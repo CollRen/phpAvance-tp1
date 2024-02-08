@@ -39,7 +39,7 @@ class RecetteHasIngredient extends PDO {
         if($stmt->execute()){
 
             require_once('./classes/Utility.php');
-            Utility::redirect($this->urlPrefix . '-add-ingredients', $this->lastInsertId());
+            Utility::redirect($this->urlPrefix . '-add-ingredient', $this->lastInsertId());
         }else{
             print_r($stmt->errorInfo());
         }   */

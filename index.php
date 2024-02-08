@@ -18,7 +18,9 @@ $select = $recette->select('recette', 'temps_preparation', 'desc');
         <thead>
             <tr>
                 <th>Titre</th>
+                <th>Description</th>
                 <th>Temps de préparation</th>
+                <th>Temps de cuisson</th>
             </tr>
         </thead>
         <tbody>
@@ -27,6 +29,8 @@ $select = $recette->select('recette', 'temps_preparation', 'desc');
             ?>
             <tr>
                 <td><a href="recette-show.php?id=<?= $row['id'];?>"><?= $row['titre']?></a></td>
+                <td><a href="recette-show.php?id=<?= $row['id'];?>"><?= $row['description']?></a></td>
+                <td><a href="recette-show.php?id=<?= $row['id'];?>"><?= $row['temps_cuisson']?></a></td>
                 <td><a href="recette-show.php?id=<?= $row['id'];?>"><?= $row['temps_preparation']?></a></td>
             </tr>
             <?php

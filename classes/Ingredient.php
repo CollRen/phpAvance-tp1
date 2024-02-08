@@ -1,7 +1,7 @@
 <?php
 
-class Ingredient extends PDO {
-    public array $listeIngredients;
+class Ingredient extends PDO { 
+    public array $listeingredient;
     private int $ingredientId;
     private string $nom;
     private string $tableName;
@@ -11,11 +11,11 @@ class Ingredient extends PDO {
         parent::__construct('mysql:host=localhost;dbname=recettes;port=3306;charset=utf8', 'root', 'root');
         $this->tableName = 'recettes.ingredient';
         $this->urlPrefix = 'ingredient';
-        $this->listeIngredients = $this->select();
+        $this->listeingredient = $this->select();
     }
 
-    public function getListeIngredients(){
-        return $this->listeIngredients;
+    public function getListeingredient(){
+        return $this->listeingredient;
     }
 
     public function select(){

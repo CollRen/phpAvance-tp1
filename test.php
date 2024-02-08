@@ -1,15 +1,48 @@
-
+<?php
+require_once('classes/Recette.php');
+$recette = new Recette;
+$select = $recette->select('recette', 'temps_preparation', 'desc');
+?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>index Recettes</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<?php include('./menu.php');
-var_dump($test);
-?>
-    
+<?php include('./menu.php');?>
+    <h1>Vos recettes sont ici!</h1>
+
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Temps de préparation</th>
+                <th>Temps de cuisson</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach($select as $row){
+            ?>
+            <tr>
+                <td><a href="recette-show.php?id=<?= $row['id'];?>"><?= $row['titre']?></a></td>
+                <td><a href="recette-show.php?id=<?= $row['id'];?>"><?= $row['description']?></a></td>
+                <td><a href="recette-show.php?id=<?= $row['id'];?>"><?= $row['temps_cuisson']?></a></td>
+                <td><a href="recette-show.php?id=<?= $row['id'];?>"><?= $row['temps_preparation']?></a></td>
+            </tr>
+            <?php
+                }
+            ?>
+        </tbody>
+    </table>
+    <a href="recette-create.php" class="btn" >Créer une recette</a>
+
+
 </body>
 </html>
