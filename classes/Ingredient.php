@@ -18,5 +18,21 @@ class Ingredient extends CRUD {
         return $this->select($this->tableName);
     }
 
+    public function selectId($value, $url, $field = 'id'){
+        $sql = "SELECT * FROM $this->tableName WHERE $field = :$field";
+        $stmt = $this->prepare($sql);
+        $stmt->bindValue(":$field", $value);
+        $stmt->execute();
+
+        $count = $stmt->rowCount();
+        if($count == 1) {
+            return $stmt->fetch();
+        }else{
+            header("location:$url.php");
+            exit;
+        }
+
+    }
+
 
 }

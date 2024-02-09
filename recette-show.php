@@ -1,13 +1,25 @@
 <?php
 
 if(isset($_GET['id']) && $_GET['id']!=null){
+
     require('classes/Recette.php');
     $recette = new Recette;
     $selectId = $recette->selectId($_GET['id'], 'index');
     extract($selectId);
+    
+    $idOfPage = $id;
+    
+
+/*     require_once('classes/Recette-has-ingredient.php');
+    $recetteHI = new RecetteHasIngredient;
+    $selectIdHI = $recette->selectId($_GET['id'], 'index');
+    extract($selectIdHI); */
+
 }else{
-    header('location:index.php');
+    
+    /* header('location:index.php'); */
 }
+
 
 ?>
 
@@ -21,17 +33,53 @@ if(isset($_GET['id']) && $_GET['id']!=null){
 </head>
 <body>
 <?php include('./menu.php');?>
-    <div class="container">
-        <h2>Voici votre recette (show)</h2>
+    <div class="affiche-recette">
+        <h2><?= $titre;?></h2>
         <hr>
-        <p><strong>Titre:</strong> <?= $titre;?></p>
-        <p><strong>Description:</strong> <?= $description;?></p>
-        <p><strong>Temps de préparation:</strong> <?= $temps_preparation;?></p>
-        <p><strong>Temps de cuisson:</strong> <?= $temps_cuisson;?></p>
-        <a href="recette-edit.php?id=<?= $selectId['id'];?>" class="btn">Edit</a>
-        
+        <p class="temps"><strong>Préparation</strong> <?= $temps_preparation;?></p>
+        <p class="temps"><strong>Cuisson</strong> <?= $temps_cuisson;?></p>
+        <hr>
+        <p><?= $description;?></p>
+
+        <h3>Ingrédients</h3>
+
+        <ul><?php 
+            /**
+             * Quantité
+             */
+            require('classes/Recette-has-ingredient.php');
+            $ingredient = new RecetteHasIngredient;
+            $ingredients = $ingredient->selectAll($id);
+            $count = count($ingredients);
+            for ($i=0; $i < $count; $i++) {
+
+                /**
+                 * Unité de mesure
+                 */
+                $quantite = $ingredients[$i]['quantite'];
+                echo '<li>' . ' ' . $quantite;
+
+                require_once('classes/UMesure.php');
+                $uniteMesure = new UMesure;
+                $selectIdUMesure = $uniteMesure->selectId($ingredients[$i]['unite_mesure_id'], 'index');
+                extract($selectIdUMesure);
+                echo ' ' . $nom;
+
+                /**
+                 * Nom de l'ingrédient
+                 */
+                require_once('classes/Ingredient.php');
+                $recette = new Ingredient;
+                $selectIdIng = $recette->selectId($ingredients[$i]['ingredient_id'], 'index');
+                extract($selectIdIng);
+                echo ' ' . $nom . '</li>';
+            }?>
+        </ul>
+            
+         <a href="recette-edit.php?id=<?= $idOfPage;?>" class="btn">Changer la recette</a>
+         <a href="recette-ingredient-edit.php?id=<?= $idOfPage;?>" class="btn">Changer les ingrédients</a>
         <form action=" <!-- Si je mets le code, ça delete directement à l'arrivée. Solution: envoyer vers une autre page à la pace -->" method="post">
-            <input type="hidden" name="id" value="<?= $selectId['id'];?>">
+            <input type="hidden" name="id" value="<?= $idOfPage ;?>">
             <button class="btn red">Delete</button>
         </form>
     </div>

@@ -38,4 +38,26 @@ class RecetteHasIngredient extends CRUD {
         header("location:".$_SERVER['HTTP_REFERER']);
     }
 
+    public function selectAll($id, $order = 'asc'){
+        $sql = "SELECT * FROM $this->tableName WHERE $this->recette_id_name = $id ORDER BY $this->ingredient_id_name $order";
+        $stmt = $this->query($sql);
+        return $stmt->fetchAll();
+    }
+    public function selectId($value, $url, $field = 'id'){
+        $sql = "SELECT * FROM $this->tableName WHERE $field = :$field";
+        $stmt = $this->prepare($sql);
+        $stmt->bindValue(":$field", $value);
+        $stmt->execute();
+
+        $count = $stmt->rowCount();
+        if($count == 1) {
+            return $stmt->fetch();
+        }else{
+            header("location:$url.php");
+            exit;
+        }
+
+    }
+
+
 }

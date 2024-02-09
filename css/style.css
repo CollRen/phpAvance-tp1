@@ -36,6 +36,14 @@ tr:nth-child(even) {
     border-radius: 10px;
 }
 
+.affiche-recette {
+    width: 600px;
+    margin: 0 auto;
+    border: 1px solid #CCCCCC;
+    padding: 30px;
+    border-radius: 10px;
+}
+
 label {
     display: block;
     margin-bottom: 10px;
@@ -94,4 +102,11 @@ input, select {
 .checkbox {
     display:flex;
     background-color: rgba(216, 216, 223, 0.382);
+}
+
+.temps {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: sepia(90%);
 }

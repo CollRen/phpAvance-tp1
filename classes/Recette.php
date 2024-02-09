@@ -40,7 +40,7 @@ class Recette extends CRUD {
 
         $count = $stmt->rowCount();
         if($count == 1) {
-            return $stmt->fetch();
+            return $stmt->fetch(PDO::FETCH_DEFAULT);
         }else{
             header("location:$url.php");
             exit;

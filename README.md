@@ -2,6 +2,13 @@
 
 ## Étapes de réalisation et notes
 
+- Code à réaliser
+    - Insertion des ingrédients dans la fiche de recette
+    - Edit d'un ingrédients pour une recette donnée
+    - Delete d'un ingrédient
+
+    - Delete d'une recette au complet incluant les ingrédients
+
 - À ajouter au dossier VSC
     - SQL
     - Table PDF
