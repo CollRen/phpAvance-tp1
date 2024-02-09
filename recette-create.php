@@ -12,8 +12,8 @@
 
         require('./classes/Recette.php');
         $recette = new Recette();
-        $insert = $action = $recette->insert('recettes.recette', $_POST);
-        header("location:recette-add-ingredient.php?id=$insert"); 
+        $action = $recette->setProp($_POST);
+
     }
 ?> 
 
