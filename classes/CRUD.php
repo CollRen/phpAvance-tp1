@@ -1,9 +1,11 @@
 <?php
 
 class CRUD extends PDO {
+    private string $tableName;
 
     public function __construct(){
         parent::__construct('mysql:host=localhost;dbname=recettes;port=3306;charset=utf8', 'root', 'root');
+        $this->tableName = 'recettes';
     }
 
     public function select($table, $field = 'id', $order = 'asc'){
@@ -12,8 +14,8 @@ class CRUD extends PDO {
         return $stmt->fetchAll();
     }
 
-    public function selectId($table, $value, $url, $field = 'id'){
-        $sql = "SELECT * FROM $table WHERE $field = :$field";
+    public function selectId($value, $url, $field = 'id'){
+        $sql = "SELECT * FROM $this->tableName WHERE $field = :$field";
         $stmt = $this->prepare($sql);
         $stmt->bindValue(":$field", $value);
         $stmt->execute();

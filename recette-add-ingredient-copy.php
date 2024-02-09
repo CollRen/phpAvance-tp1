@@ -2,7 +2,7 @@
 /* if(isset($_GET['id']) && $_GET['id']!=null){
     require_once('classes/Recette.php');
     $recette = new Recette;
-    $selectId = $recette->selectId('recettes.recette', $_GET['id'], 'index');
+    $selectId = $recette->selectId($_GET['id'], 'index');
     extract($selectId);
 }else{
     exit;

@@ -28,10 +28,10 @@ if(isset($_GET['id']) && $_GET['id']!=null){
         <p><strong>Description:</strong> <?= $description;?></p>
         <p><strong>Temps de préparation:</strong> <?= $temps_preparation;?></p>
         <p><strong>Temps de cuisson:</strong> <?= $temps_cuisson;?></p>
-        <a href="recette-edit.php?id=<?= $selectId['id'];?>" class="btn">Edit</a>
+        <a href="recette-edit.php?id=<?= $selectId;?>" class="btn">Edit</a>
         
         <form action=" <!-- Si je mets le code, ça delete directement à l'arrivée. Solution: envoyer vers une autre page à la pace -->" method="post">
-            <input type="hidden" name="id" value="<?= $selectId['id'];?>">
+            <input type="hidden" name="id" value="<?= $selectId;?>">
             <button class="btn red">Delete</button>
         </form>
     </div>

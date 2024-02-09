@@ -31,6 +31,22 @@ class Recette extends CRUD {
         return header("location:recette-add-ingredient.php?id=$this->recetteId");
 
     }
+
+    public function selectId($value, $url, $field = 'id'){
+        $sql = "SELECT * FROM $this->tableName WHERE $field = :$field";
+        $stmt = $this->prepare($sql);
+        $stmt->bindValue(":$field", $value);
+        $stmt->execute();
+
+        $count = $stmt->rowCount();
+        if($count == 1) {
+            return $stmt->fetch();
+        }else{
+            header("location:$url.php");
+            exit;
+        }
+
+    }
 }
 
 ?>

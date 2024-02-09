@@ -1,5 +1,13 @@
 # phpAvance-tp1
 
+## Étapes de réalisation et notes
+
+- À ajouter au dossier VSC
+    - SQL
+    - Table PDF
+    - README.me des instructions
+
+
 ## Git
 
 - Annuler un git init
