@@ -9,10 +9,7 @@ if(isset($_GET['id']) && $_GET['id']!=null){
 }else{
     header('location:index.php');
 }
-print_r($_POST);
-echo '<br>';
-echo '<br>';
-echo '<br>';
+
 
 
 if(isset($_POST['ingredient_id'])){
@@ -20,22 +17,7 @@ if(isset($_POST['ingredient_id'])){
     $recetteHasIngredient = new RecetteHasIngredient;
     $recetteHasIngredient->setProp($_POST, $id);
 
-
-    
-
-
-/*     require_once('./classes/Recette-has-ingredient.php');
-    $hasIngredient = new RecetteHasIngredient();
-    $action = $hasIngredient->setProp($_POST); */
-    } else {
-        echo 'marche pas';
     }
-
-/*         require('./classes/Recette-has-ingredient.php');
-        $recetteHasIng = new RecetteHasIngredient();
-        $insert = $action = $recetteHasIng->insert('recettes.recette_has_ingredient', $_POST);
-        header("location:recette-has-ingredient-insert.php" . $insert); 
-    }*/
 ?> 
 
 <!DOCTYPE html>
