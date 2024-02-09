@@ -1,9 +1,19 @@
 
 <?php
     if(isset($_POST['titre'])){
+        print_r($_POST);
+        $fieldName = implode(', ', array_keys($_POST));
+        echo '<br><br>fieldName:<br>';
+        print_r($fieldName);
+        $fieldValue = ':'.implode(', :', array_keys($_POST));
+        echo '<br><br>fielValue:<br>';
+        print_r($fieldValue);
+
+
         require('./classes/Recette.php');
         $recette = new Recette();
-        $action = $recette->insert('recettes.recette', $_POST);
+        $insert = $action = $recette->insert('recettes.recette', $_POST);
+        header("location:recette-add-ingredient.php?id=$insert"); 
     }
 ?> 
 
