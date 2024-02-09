@@ -1,47 +1,32 @@
 <?php
-
-require('./classes/Recette.php');
-
-class RecetteHasIngredient extends PDO {
-    private int $recetteId;
+require_once('./classes/CRUD.php');
+class RecetteHasIngredient extends CRUD {
+    private int $recettehasIngredientId;
     private string $nom;
     private string $tableName;
     private string $urlPrefix;
+    private array $post;
+    private array $arrayToInsert;
 
     public function __construct(){
         parent::__construct('mysql:host=localhost;dbname=recettes;port=3306;charset=utf8', 'root', 'root');
         $this->tableName = 'recettes.recette_has_ingredient';
-    }
-
-    public function select(){
-        $sql = "SELECT * FROM $this->tableName ORDER BY 'id' 'asc'";
-        $stmt = $this->query($sql);
-        return $stmt->fetchAll();
-    }
-
-    public function insert($table, $data){
-
-
-        print_r($data);
-        echo '<br><br><br>';
-
-        /* $fieldName = implode(', ', array_keys($data));
-        $fieldValue = ':'.implode(', :', array_keys($data));
-
-        $sql = "INSERT INTO $table ($fieldName) VALUES ($fieldValue);";
+        $this->arrayToInsert = array();
         
-        //return $sql;
-
-        $stmt = $this->prepare($sql);
-        foreach($data as $key=>$value){
-            $stmt->bindValue(":$key", $value);
-        }
-        if($stmt->execute()){
-
-            require_once('./classes/Utility.php');
-            Utility::redirect($this->urlPrefix . '-add-ingredient', $this->lastInsertId());
-        }else{
-            print_r($stmt->errorInfo());
-        }   */
     }
+
+    public function setProp($post, $recetteId) {
+        for ($i = 0; $i < count($post['ingredient_id']); $i++) {    
+            if($post['quantite'][$i] > 0 ) {
+                $this->arrayToInsert['recette_id'] = $recetteId;
+                $this->arrayToInsert['ingredient_id'] = $post['ingredient_id'][$i];
+                $this->arrayToInsert['quantite'] = $post['quantite'][$i];
+                $this->arrayToInsert['unite_mesure_id'] = $post['unite_mesure_id'][$i];
+                $this->insert($this->tableName, $this->arrayToInsert);
+                $this->arrayToInsert = array_diff($this->arrayToInsert, $this->arrayToInsert);
+            }
+        }
+        header("location:".$_SERVER['HTTP_REFERER']);
+    }
+
 }

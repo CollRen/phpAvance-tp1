@@ -1,7 +1,6 @@
 <?php
-
-require('./classes/Recette.php');
-class UMesure extends PDO {
+require_once('./classes/CRUD.php');
+class UMesure extends CRUD {
 
     public int $UMesureId;
     public string $nom;
@@ -13,22 +12,10 @@ class UMesure extends PDO {
         parent::__construct('mysql:host=localhost;dbname=recettes;port=3306;charset=utf8', 'root', 'root');
         $this->tableName = 'recettes.unite_mesure';
         $this->urlPrefix = 'unite-mesure';
-        $this->listeUMesure = $this->select();
+        $this->listeUMesure = $this->select($this->tableName);
     }
 
     public function getListeUMesure(){
-        return $this->select();
+        return $this->select($this->tableName);
     }
-
-    public function redirect(){
-        require_once('./classes/Utility.php');
-        Utility::redirect($this->urlPrefix . '-show.php', $this->UMesureId );
-    }
-
-    public function select(){
-        $sql = "SELECT * FROM $this->tableName ORDER BY 'id' 'asc'";
-        $stmt = $this->query($sql);
-        return $stmt->fetchAll();
-    }
-
 }

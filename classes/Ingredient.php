@@ -1,6 +1,6 @@
 <?php
-
-class Ingredient extends PDO { 
+require_once('./classes/CRUD.php');
+class Ingredient extends CRUD {  
     public array $listeingredient;
     private int $ingredientId;
     private string $nom;
@@ -11,16 +11,12 @@ class Ingredient extends PDO {
         parent::__construct('mysql:host=localhost;dbname=recettes;port=3306;charset=utf8', 'root', 'root');
         $this->tableName = 'recettes.ingredient';
         $this->urlPrefix = 'ingredient';
-        $this->listeingredient = $this->select();
+        $this->listeingredient = $this->select($this->tableName);
     }
 
     public function getListeingredient(){
-        return $this->listeingredient;
+        return $this->select($this->tableName);
     }
 
-    public function select(){
-        $sql = "SELECT * FROM $this->tableName ORDER BY 'id' 'asc'";
-        $stmt = $this->query($sql);
-        return $stmt->fetchAll();
-    }
+
 }

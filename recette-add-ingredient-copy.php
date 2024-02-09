@@ -1,42 +1,52 @@
 <?php
-
-if(isset($_GET['id']) && $_GET['id']!=null){
+/* if(isset($_GET['id']) && $_GET['id']!=null){
     require_once('classes/Recette.php');
     $recette = new Recette;
-    $id = $_GET['id'];
     $selectId = $recette->selectId('recettes.recette', $_GET['id'], 'index');
     extract($selectId);
 }else{
-    header('location:index.php');
-}
-print_r($_POST);
-echo '<br>';
-echo '<br>';
-echo '<br>';
+    exit;
+    header('location:index.php'); 
+}*/
 
+    if(isset($_POST)){
 
-if(isset($_POST['ingredient_id'])){
-    require_once('./classes/Recette-has-ingredient.php');
-    $recetteHasIngredient = new RecetteHasIngredient;
-    $recetteHasIngredient->setProp($_POST, $id);
-
-
-    
-
-
-/*     require_once('./classes/Recette-has-ingredient.php');
-    $hasIngredient = new RecetteHasIngredient();
-    $action = $hasIngredient->setProp($_POST); */
-    } else {
-        echo 'marche pas';
-    }
+        var_dump($_POST);
 
 /*         require('./classes/Recette-has-ingredient.php');
         $recetteHasIng = new RecetteHasIngredient();
         $insert = $action = $recetteHasIng->insert('recettes.recette_has_ingredient', $_POST);
-        header("location:recette-has-ingredient-insert.php" . $insert); 
-    }*/
+        header("location:recette-has-ingredient-insert.php" . $insert); */
+    }
 ?> 
+
+<!-- 
+array(2) 
+{ 
+    ["qte"]=> array(8) 
+    { 
+        [0]=> string(1) "0" 
+        [1]=> string(1) "0" 
+        [2]=> string(1) "0" 
+        [3]=> string(1) "0" 
+        [4]=> string(1) "0" 
+        [5]=> string(1) "0" 
+        [6]=> string(1) "0" 
+        [7]=> string(4) "0.75" 
+    } 
+    ["UMesure"]=> array(8) 
+    { 
+        [0]=> string(1) "1" 
+        [1]=> string(1) "1" 
+        [2]=> string(1) "1" 
+        [3]=> string(1) "1" 
+        [4]=> string(1) "1" 
+        [5]=> string(1) "1" 
+        [6]=> string(1) "1" 
+        [7]=> string(1) "3" 
+    } 
+} 
+-->
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -48,15 +58,14 @@ if(isset($_POST['ingredient_id'])){
 </head>
 <body>
 <?php include('./menu.php');?>
+
     <div class="container">
         <h2>Recette add ingredient Create</h2>
 
-        <form action="<?php $action ?>" method="post">
+        <form action="<?php new Recette  ?>" method="post">
             <table>
                 <thead>
                     <tr>
-                        <td>#</td>
-                        <td>Ingrédients</td>
                         <td>Qté</td>
                         <td>U. Mesure</td>
                     </tr>
@@ -65,19 +74,12 @@ if(isset($_POST['ingredient_id'])){
                 <tbody>
                     <tr>
                         <?php require_once('./classes/Ingredient.php'); 
-                        $ing = new ingredient;
-                        $ing = $ing->select('recettes.ingredient'); 
-                        foreach ($ing as $row) { ?>
-                        <td>
-                        <input type="text" name="ingredient_id[]" value="<?php echo $row['id']; ?>"/>
-                        </td>
-                        <td>
-                       
-                            <?php echo $row['nom']; ?>
-                        </td>
+                        $ingredient = new ingredient;
+                        $ingredient = $ingredient->select('recettes.ingredient'); 
+                        foreach ($ingredient as $rangees) { ?>
 
                         <td>
-                            <input max="10" min="0" name="quantite[]" step=".25" type="number" value="0" />
+                            <label for="quantite[]"><input max="10" min="0" name="quantite[]" step=".25" type="number" value="0" /><?php echo $rangees['nom']; ?></label>
                         </td>
                         
                         <td>
@@ -97,6 +99,8 @@ if(isset($_POST['ingredient_id'])){
             </table>
             <input type="submit" class="btn" value="Save">
         </form>
+
+
     </div>
 </body>
 </html>
