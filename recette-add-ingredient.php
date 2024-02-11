@@ -10,13 +10,14 @@ if(isset($_GET['id']) && $_GET['id']!=null){
     header('location:index.php');
 }
 
-
-
-if(isset($_POST['ingredient_id'])){
+/**
+ * Lancer l'enregistrement seulement si la quantité > 0;
+ */
+if(isset($_POST['ingredient_id']) && $_POST['quantite'] > 0){
     require_once('./classes/Recette-has-ingredient.php');
     $recetteHasIngredient = new RecetteHasIngredient;
-    $recetteHasIngredient->setProp($_POST, $id);
-
+    $lastInsertId[] = $recetteHasIngredient->insert($_POST, $id);
+    $count = count($lastInsertId);
     }
 ?> 
 
@@ -29,56 +30,51 @@ if(isset($_POST['ingredient_id'])){
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<?php include('./menu.php');?>
+    <header>
+        <?php include('./menu.php');?>
+    </header>
     <div class="container">
-        <h2>Recette add ingredient Create</h2>
+        <h2>Ajouter maintenant les ingrédients</h2>
 
-        <form action="<?php $action ?>" method="post">
-            <table>
-                <thead>
-                    <tr>
-                        <td>#</td>
-                        <td>Ingrédients</td>
-                        <td>Qté</td>
-                        <td>U. Mesure</td>
-                    </tr>
-                </thead>
+        <?php include('./recette-add-ingredient-form.php') ?>
+            
+        <h3>Ingrédients</h3>
 
-                <tbody>
-                    <tr>
-                        <?php require_once('./classes/Ingredient.php'); 
-                        $ing = new ingredient;
-                        $ing = $ing->select('recettes.ingredient'); 
-                        foreach ($ing as $row) { ?>
-                        <td>
-                        <input type="text" name="ingredient_id[]" value="<?php echo $row['id']; ?>"/>
-                        </td>
-                        <td>
-                       
-                            <?php echo $row['nom']; ?>
-                        </td>
+        <ul><?php 
+            /**
+             * Quantité
+             */
+            require_once('classes/Recette-has-ingredient.php');
+            $ingredient = new RecetteHasIngredient;
+            $ingredients = $ingredient->selectAll($id);
+            $count = count($ingredients);
+            for ($i=0; $i < $count; $i++) {
 
-                        <td>
-                            <input max="10" min="0" name="quantite[]" step=".25" type="number" value="0" />
-                        </td>
-                        
-                        <td>
-                            <select name="unite_mesure_id[]">
-                                <?php require_once('./classes/UMesure.php'); 
-                                $Umesure = new UMesure;
-                                $Umesure = $Umesure->select('recettes.unite_mesure');
-                                foreach ($Umesure as $row) { ?>
-                                
-                                    <option value="<?php echo $row['id']; ?>"><?php echo $row['nom']; ?></option>
-                                
-                                <?php } ?>
-                            </select>
-                        </td>
-                    </tr><?php } ?>
-                </tbody>
-            </table>
-            <input type="submit" class="btn" value="Save">
-        </form>
+                /**
+                 * Unité de mesure
+                 */
+                $quantite = $ingredients[$i]['quantite'];
+                echo '<li>' . ' ' . $quantite;
+
+                require_once('classes/UMesure.php');
+                $uniteMesure = new UMesure;
+                $selectIdUMesure = $uniteMesure->selectId($ingredients[$i]['unite_mesure_id'], 'index');
+                extract($selectIdUMesure);
+                echo ' ' . $nom;
+
+                /**
+                 * Nom de l'ingrédient
+                 */
+                require_once('classes/Ingredient.php');
+                $recette = new Ingredient;
+                $selectIdIng = $recette->selectId($ingredients[$i]['ingredient_id'], 'index');
+                extract($selectIdIng);
+                echo ' ' . $nom . '</li>';
+            }?>
+        </ul>
+      
+        <a href="recette-show.php?id=<?= $id;?>" class="btn">Afficher la recette</a>
+
     </div>
 </body>
 </html>

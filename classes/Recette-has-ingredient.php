@@ -23,7 +23,7 @@ class RecetteHasIngredient extends CRUD {
         $this->quantiteName = 'quantite';
         
     }
-
+    /** S'il y a plusieurs ingrédients à ajouter en même temps */
     public function setProp($post, $recetteId) {
         for ($i = 0; $i < count($post[$this->ingredient_id_name]); $i++) {    
             if($post[$this->quantiteName][$i] > 0 ) {
@@ -57,6 +57,28 @@ class RecetteHasIngredient extends CRUD {
             exit;
         }
 
+    }
+
+    public function insert($data, $id){
+        $table = $this->tableName;
+        $data[$this->recette_id_name] = $id;
+
+        $fieldName = implode(', ', array_keys($data));
+        $fieldValue = ':'.implode(', :', array_keys($data));
+
+        $sql = "INSERT INTO $table ($fieldName) VALUES ($fieldValue);";
+        
+        //return $sql;
+
+        $stmt = $this->prepare($sql);
+        foreach($data as $key=>$value){
+            $stmt->bindValue(":$key", $value);
+        }
+        if($stmt->execute()){
+            return $this->lastInsertId();
+        }else{
+            print_r($stmt->errorInfo());
+        }      
     }
 
 

@@ -1,5 +1,5 @@
 <?php 
-
+// Fichier non-utilisé je pense...
 $arrayToInsert = [['recette_id'],['ingredient_id'],['quantite'],['unite_mesure_id']];
 
 echo '<br><br> arrayToInsert:';

@@ -77,6 +77,7 @@ if(isset($_GET['id']) && $_GET['id']!=null){
         </ul>
             
          <a href="recette-edit.php?id=<?= $idOfPage;?>" class="btn">Changer la recette</a>
+         
          <a href="recette-ingredient-edit.php?id=<?= $idOfPage;?>" class="btn">Changer les ingrédients</a>
         <form action=" <!-- Si je mets le code, ça delete directement à l'arrivée. Solution: envoyer vers une autre page à la pace -->" method="post">
             <input type="hidden" name="id" value="<?= $idOfPage ;?>">

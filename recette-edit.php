@@ -4,6 +4,7 @@ if(isset($_GET['id']) && $_GET['id']!=null){
     $recette = new Recette;
     $selectId = $recette->selectId($_GET['id'], 'index');
     extract($selectId);
+    $id = $_GET['id'];
 }else{
     header('location:index.php');
 }
@@ -38,6 +39,8 @@ isset($_POST['titre'])
             </label>
             <input type="submit" class="btn" value="Update">
         </form>
+
+        <a href="recette-show.php?id=<?= $id;?>" class="btn">Afficher la recette</a>
     </div>
 </body>
 </html>
