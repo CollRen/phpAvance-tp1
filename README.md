@@ -3,11 +3,13 @@
 ## Étapes de réalisation et notes
 
 - Code à réaliser
-    - Insertion des ingrédients dans la fiche de recette
+…
     - Edit d'un ingrédients pour une recette donnée
-    - Delete d'un ingrédient
+    - Page pour ajouter/éditer/delete des ingrédients
+    - Page pour ajouter/éditer/delete des UMesures
 
     - Delete d'une recette au complet incluant les ingrédients
+    - Menu principal
 
 - À ajouter au dossier VSC
     - SQL
