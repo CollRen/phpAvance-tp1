@@ -13,11 +13,6 @@ class Utility {
     static public function redirect($url, $insert) {
         header("location: $url.php" . "?id=$insert");
     }
-    
-
-/*     static public function getID(){
-        return ;
-    } */
 }
 
 ?>

@@ -4,11 +4,14 @@ if(isset($_GET['id']) && $_GET['id']!=null){
     require_once('classes/Recette.php');
     $recette = new Recette;
     $id = $_GET['id'];
-    $selectId = $recette->selectId($_GET['id'], 'index');
+    $selectId = $recette->selectId($_GET['id'], 'index', 'recette');
     extract($selectId);
 }else{
     header('location:index.php');
 }
+
+$idRecette = $id;
+
 
 /**
  * Lancer l'enregistrement seulement si la quantité > 0;
@@ -58,7 +61,7 @@ if(isset($_POST['ingredient_id']) && $_POST['quantite'] > 0){
 
                 require_once('classes/UMesure.php');
                 $uniteMesure = new UMesure;
-                $selectIdUMesure = $uniteMesure->selectId($ingredients[$i]['unite_mesure_id'], 'index');
+                $selectIdUMesure = $uniteMesure->selectId($ingredients[$i]['unite_mesure_id'], 'index', 'unite_mesure');
                 extract($selectIdUMesure);
                 echo ' ' . $nom;
 
@@ -67,13 +70,13 @@ if(isset($_POST['ingredient_id']) && $_POST['quantite'] > 0){
                  */
                 require_once('classes/Ingredient.php');
                 $recette = new Ingredient;
-                $selectIdIng = $recette->selectId($ingredients[$i]['ingredient_id'], 'index');
+                $selectIdIng = $recette->selectId($ingredients[$i]['ingredient_id'], 'index', 'ingredient');
                 extract($selectIdIng);
                 echo ' ' . $nom . '</li>';
             }?>
         </ul>
       
-        <a href="recette-show.php?id=<?= $id;?>" class="btn">Afficher la recette</a>
+        <a href="recette-show.php?id=<?= $idRecette;?>" class="btn">Afficher la recette</a>
 
     </div>
 </body>

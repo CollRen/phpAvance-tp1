@@ -8,7 +8,10 @@ action="<?php if(isset($_POST['titre'])) {$update = $recette->update('recette', 
 
 ### Dans Recette.php
 
-1. comment voir un var_dump() du update
+1. Comment voir un var_dump() du update
+
+
+2. J'aimerais que $this->quelquesChose qui est dans CRUD fasse référence au $this->quelquesChose de l'enfant
 
 ____________________
 

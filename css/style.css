@@ -110,3 +110,9 @@ input, select {
     flex-direction: column;
     backdrop-filter: sepia(90%);
 }
+
+.recetteEdit {
+    display:flex;
+    justify-content: space-between;
+
+}
