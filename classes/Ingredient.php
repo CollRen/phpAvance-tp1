@@ -10,7 +10,7 @@ class Ingredient extends CRUD {
 
     public function __construct(){
         parent::__construct('mysql:host=localhost;dbname=recettes;port=3306;charset=utf8', 'root', 'root');
-        $this->tableName = 'recettes.ingredient';
+        $this->tableName = 'ingredient';
         $this->urlPrefix = 'ingredient';
         $this->listeingredient = $this->select($this->tableName);
     }

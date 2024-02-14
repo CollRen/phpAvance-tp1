@@ -15,7 +15,7 @@
 
 /*         require('./classes/Recette-has-ingredient.php');
         $recetteHasIng = new RecetteHasIngredient();
-        $insert = $action = $recetteHasIng->insert('recettes.recette_has_ingredient', $_POST);
+        $insert = $action = $recetteHasIng->insert('recette_has_ingredient', $_POST);
         header("location:recette-has-ingredient-insert.php" . $insert); */
     }
 ?> 
@@ -75,7 +75,7 @@ array(2)
                     <tr>
                         <?php require_once('./classes/Ingredient.php'); 
                         $ingredient = new ingredient;
-                        $ingredient = $ingredient->select('recettes.ingredient'); 
+                        $ingredient = $ingredient->select('ingredient'); 
                         foreach ($ingredient as $rangees) { ?>
 
                         <td>
@@ -86,7 +86,7 @@ array(2)
                             <select name="unite_mesure_id[]">
                                 <?php require_once('./classes/UMesure.php'); 
                                 $Umesure = new UMesure;
-                                $Umesure = $Umesure->select('recettes.unite_mesure');
+                                $Umesure = $Umesure->select('unite_mesure');
                                 foreach ($Umesure as $row) { ?>
                                 
                                     <option value="<?php echo $row['id']; ?>"><?php echo $row['nom']; ?></option>

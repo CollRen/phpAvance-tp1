@@ -1,13 +1,17 @@
 <?php
-if(isset($_GET['id']) && $_GET['id']!=null){
-    require('classes/Recette.php');
+if(isset($_GET['recette_id']) && $_GET['recette_id']!=null){
+    print_r($_GET);
+/*     require('classes/Recette.php');
     $recette = new Recette;
-    $selectId = $recette->selectId($_GET['id'], 'index');
-    extract($selectId);
+    $selectId = $recette->selectId($_GET['id'], 'index', 'recette');
+    extract($selectId); */
 }else{
-    header('location:index.php');
+    echo 'NON';
+    print_r($_GET);
+    //header('location:index.php');
 }
 
+$recetteId = $_GET['recette_id'];
 
 ?>
 <!DOCTYPE html>
@@ -23,13 +27,30 @@ if(isset($_GET['id']) && $_GET['id']!=null){
 
 <h3>Ingrédients</h3>
 
+
+    <?php require_once('./classes/Recette-has-ingredient.php'); 
+    $ing = new RecetteHasIngredient;
+    $ing = $ing->selectWhere('recette_has_ingredient', 'recette_id', $recetteId);   
+    foreach ($ing as $row) { 
+            $ingredientId = $row['ingredient_id'];
+            $ingredients = $ingredient->selectAll($ingredientId);
+            ?>
+
+        <select name="ingredient">
+            
+        <option value="<?php echo $row['recette_id']; ?>"><?php echo $row['ingredient_id']; ?></option>
+
+    </select>
+    <?php } ?>
+
+
 <ul><?php 
     /**
      * Quantité
      */
-    require('classes/Recette-has-ingredient.php');
+    require_once('classes/Recette-has-ingredient.php');
     $ingredient = new RecetteHasIngredient;
-    $ingredients = $ingredient->selectAll($id);
+    $ingredients = $ingredient->selectAll($recetteId);
     $count = count($ingredients);
     for ($i=0; $i < $count; $i++) {
 
@@ -41,7 +62,7 @@ if(isset($_GET['id']) && $_GET['id']!=null){
 
         require_once('classes/UMesure.php');
         $uniteMesure = new UMesure;
-        $selectIdUMesure = $uniteMesure->selectId($ingredients[$i]['unite_mesure_id'], 'index');
+        $selectIdUMesure = $uniteMesure->selectId($ingredients[$i]['unite_mesure_id'], 'index', 'unite_mesure');
         extract($selectIdUMesure);
         echo ' ' . $nom;
 
@@ -50,7 +71,7 @@ if(isset($_GET['id']) && $_GET['id']!=null){
          */
         require_once('classes/Ingredient.php');
         $recette = new Ingredient;
-        $selectIdIng = $recette->selectId($ingredients[$i]['ingredient_id'], 'index');
+        $selectIdIng = $recette->selectId($ingredients[$i]['ingredient_id'], 'index','ingredient');
         extract($selectIdIng);
         echo ' ' . $nom . '</li>';
     }?>
@@ -59,23 +80,95 @@ if(isset($_GET['id']) && $_GET['id']!=null){
 <?php include('./menu.php');?>
     <div class="container">
         <h2>Ajuster les ingrédients</h2>
+        <ul><?php 
+            /**
+             * Quantité
+             */
+            require_once('classes/Recette-has-ingredient.php');
+            $ingredient = new RecetteHasIngredient;
+            $ingredients = $ingredient->selectAll($recetteId);
+            $count = count($ingredients);
+            for ($i=0; $i < $count; $i++) {
 
-        <form action="<?php if(isset($_POST['titre'])) {$update = $recette->update('recette', $_POST);}  ?>" method="post">
-            <input type="hidden" name="id" value="<?= $id;?>">
-            <label>Ingrédients
-                <input type="text" name="titre" value="<?= $titre;?>">
-            </label>
-            <label>Description
-                <input type="text" name="description" value="<?= $description;?>">
-            </label>
-            <label>Temps de préparation
-                <input type="text" name="temps_preparation" value="<?= $temps_preparation;?>">
-            </label>
-            <label>Temps de cuisson
-                <input type="text" name="temps_cuisson" value="<?= $temps_cuisson;?>">
-            </label>
-            <input type="submit" class="btn" value="Update">
-        </form>
+                /**
+                 * Unité de mesure
+                 */
+                $quantite = $ingredients[$i]['quantite'];
+                echo '<li>' . ' ' . $quantite;
+
+                require_once('classes/UMesure.php');
+                $uniteMesure = new UMesure;
+                $selectIdUMesure = $uniteMesure->selectId($ingredients[$i]['unite_mesure_id'], 'index', 'unite_mesure');
+                extract($selectIdUMesure);
+                echo ' ' . $nom;
+
+                /**
+                 * Nom de l'ingrédient
+                 */
+                require_once('classes/Ingredient.php');
+                $recette = new Ingredient;
+                $selectIdIng = $recette->selectId($ingredients[$i]['ingredient_id'], 'index', 'ingredient');
+                extract($selectIdIng);
+                echo ' ' . $nom . '</li>';
+            }?>
+        </ul>
+
+
+
+
+
+<form action="<?php $action ?>" method="post">
+    <table>
+        <thead>
+            <tr>
+
+                <td>la</td>
+                <td>Qté</td>
+                <td>U. Mesure</td>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>
+                <select name="ingredient_id">
+                    <?php require_once('./classes/Ingredient.php'); 
+                    $ing = new ingredient;
+                    $ing = $ing->select('ingredient');   
+                    foreach ($ing as $row) { ?>
+                    
+                        <option value="<?php echo $row['id']; ?>"><?php echo $row['nom']; ?></option>
+                    
+                    <?php } ?></select>
+                </td>
+
+
+                <td>
+                    <input max="10" min="0" name="quantite" step=".25" type="number" value="0" />
+                </td>
+                
+                <td>
+                    <select name="unite_mesure_id">
+                        <?php require_once('./classes/UMesure.php'); 
+                        $Umesure = new UMesure;
+                        $Umesure = $Umesure->select('unite_mesure');
+                        foreach ($Umesure as $row) { ?>
+                        
+                            <option value="<?php echo $row['id']; ?>"><?php echo $row['nom']; ?></option>
+                        
+                        <?php } ?>
+                    </select>
+                </td>
+
+        </tbody>
+    </table>
+    
+    <input type="submit" class="btn" value="Save">
+</form>
+
+
+
+
     </div>
 </body>
 </html>

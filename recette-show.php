@@ -4,10 +4,10 @@ if(isset($_GET['id']) && $_GET['id']!=null){
 
     require('classes/Recette.php');
     $recette = new Recette;
-    $selectId = $recette->selectId($_GET['id'], 'index');
+    $selectId = $recette->selectId($_GET['id'], 'index', 'recette');
     extract($selectId);
     
-    $idOfPage = $id;
+    $idRecette = $id;
     
 
 /*     require_once('classes/Recette-has-ingredient.php');
@@ -49,7 +49,7 @@ if(isset($_GET['id']) && $_GET['id']!=null){
              */
             require('classes/Recette-has-ingredient.php');
             $ingredient = new RecetteHasIngredient;
-            $ingredients = $ingredient->selectAll($id);
+            $ingredients = $ingredient->selectAll($idRecette);
             $count = count($ingredients);
             for ($i=0; $i < $count; $i++) {
 
@@ -61,7 +61,7 @@ if(isset($_GET['id']) && $_GET['id']!=null){
 
                 require_once('classes/UMesure.php');
                 $uniteMesure = new UMesure;
-                $selectIdUMesure = $uniteMesure->selectId($ingredients[$i]['unite_mesure_id'], 'index');
+                $selectIdUMesure = $uniteMesure->selectId($ingredients[$i]['unite_mesure_id'], 'index', 'unite_mesure');
                 extract($selectIdUMesure);
                 echo ' ' . $nom;
 
@@ -70,19 +70,15 @@ if(isset($_GET['id']) && $_GET['id']!=null){
                  */
                 require_once('classes/Ingredient.php');
                 $recette = new Ingredient;
-                $selectIdIng = $recette->selectId($ingredients[$i]['ingredient_id'], 'index');
+                $selectIdIng = $recette->selectId($ingredients[$i]['ingredient_id'], 'index', 'ingredient');
                 extract($selectIdIng);
                 echo ' ' . $nom . '</li>';
             }?>
         </ul>
             
-         <a href="recette-edit.php?id=<?= $idOfPage;?>" class="btn">Changer la recette</a>
+         <a href="recette-edit.php?id=<?= $idRecette;?>" class="btn">Changer la recette</a>
+         <a href="recette-delete.php?id=<?= $idRecette;?>" class="btn red">Effacer la recette</a>
          
-         <a href="recette-ingredient-edit.php?id=<?= $idOfPage;?>" class="btn">Changer les ingrédients</a>
-        <form action=" <!-- Si je mets le code, ça delete directement à l'arrivée. Solution: envoyer vers une autre page à la pace -->" method="post">
-            <input type="hidden" name="id" value="<?= $idOfPage ;?>">
-            <button class="btn red">Delete</button>
-        </form>
     </div>
 </body>
 </html>

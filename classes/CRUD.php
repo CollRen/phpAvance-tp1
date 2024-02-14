@@ -1,15 +1,19 @@
 <?php
 
 class CRUD extends PDO {
-    private string $tableName;
 
     public function __construct(){
         parent::__construct('mysql:host=localhost;dbname=recettes;port=3306;charset=utf8', 'root', 'root');
-        $this->tableName = 'recette';
     }
 
     public function select($table, $field = 'id', $order = 'asc'){
         $sql = "SELECT * FROM $table ORDER BY $field $order";
+        $stmt = $this->query($sql);
+        return $stmt->fetchAll();
+    }
+    
+    public function selectWhere($table, $field, $where){
+        $sql = "SELECT * FROM $table WHERE $field = $where";
         $stmt = $this->query($sql);
         return $stmt->fetchAll();
     }

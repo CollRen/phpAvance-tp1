@@ -15,7 +15,7 @@ class RecetteHasIngredient extends CRUD {
 
     public function __construct(){
         parent::__construct('mysql:host=localhost;dbname=recettes;port=3306;charset=utf8', 'root', 'root');
-        $this->tableName = 'recettes.recette_has_ingredient';
+        $this->tableName = 'recette_has_ingredient';
         $this->arrayToInsert = array();
         $this->recette_id_name = 'recette_id';
         $this->ingredient_id_name = 'ingredient_id';
@@ -43,6 +43,7 @@ class RecetteHasIngredient extends CRUD {
         $stmt = $this->query($sql);
         return $stmt->fetchAll();
     }
+
 
     public function insert($data, $id){
         $table = $this->tableName;

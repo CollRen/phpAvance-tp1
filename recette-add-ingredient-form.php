@@ -17,7 +17,7 @@
                 <select name="ingredient_id">
                     <?php require_once('./classes/Ingredient.php'); 
                     $ing = new ingredient;
-                    $ing = $ing->select('recettes.ingredient');   
+                    $ing = $ing->select('ingredient');   
                     foreach ($ing as $row) { ?>
                     
                         <option value="<?php echo $row['id']; ?>"><?php echo $row['nom']; ?></option>
@@ -34,7 +34,7 @@
                     <select name="unite_mesure_id">
                         <?php require_once('./classes/UMesure.php'); 
                         $Umesure = new UMesure;
-                        $Umesure = $Umesure->select('recettes.unite_mesure');
+                        $Umesure = $Umesure->select('unite_mesure');
                         foreach ($Umesure as $row) { ?>
                         
                             <option value="<?php echo $row['id']; ?>"><?php echo $row['nom']; ?></option>

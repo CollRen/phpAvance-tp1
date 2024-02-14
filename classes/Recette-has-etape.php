@@ -15,7 +15,7 @@ class RecetteHasEtape extends CRUD {
 
     public function __construct(){
         parent::__construct('mysql:host=localhost;dbname=recettes;port=3306;charset=utf8', 'root', 'root');
-        $this->tableName = 'recettes.recette_has_etape';
+        $this->tableName = 'recette_has_etape';
         $this->arrayToInsert = array();
         $this->recette_id_name = 'recette_id';
         $this->etape_id_name = 'etape_id';

@@ -10,8 +10,7 @@ class UMesure extends CRUD {
 
     public function __construct(){
         parent::__construct('mysql:host=localhost;dbname=recettes;port=3306;charset=utf8', 'root', 'root');
-        $this->tableName = 'recettes.unite_mesure';
-        $this->urlPrefix = 'unite-mesure';
+        $this->tableName = 'unite_mesure';
         $this->listeUMesure = $this->select($this->tableName);
     }
 

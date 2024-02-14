@@ -2,13 +2,11 @@
 
 ## Étapes de réalisation et notes
 
-- Code à réaliser
-…
-    - Edit d'un ingrédients pour une recette donnée
-    - Page pour ajouter/éditer/delete des ingrédients
-    - Page pour ajouter/éditer/delete des UMesures
+- Fait le delete et vérifie que tout le CRUD est utilisé
+- 
 
-    - Delete d'une recette au complet incluant les ingrédients
+
+    - Delete d'une recette au complet incluant les ingrédients?
     - Menu principal
 
 - À ajouter au dossier VSC
@@ -32,8 +30,8 @@ rm -rf .git
 4. [...]-index [C'est une liste de toutes les entrées]
 5. [...]-edit [envoie vers update]  ______ Ici il y a le isset() en haut de page ::::: puis la redirection dans le action=""
 6. [...]-delete
-7. [...]-update* => update('client' ---> update('recettes.unite_mesure' [reste sur la même page (header("location:".$_SERVER['HTTP_REFERER']);)]
+7. [...]-update* => update('client' ---> update('unite_mesure' [reste sur la même page (header("location:".$_SERVER['HTTP_REFERER']);)]
 
 
-* insert('client' ---> insert('recettes.unite_mesure'
+* insert('client' ---> insert('unite_mesure'
 - client-show - unite-mesure-showt

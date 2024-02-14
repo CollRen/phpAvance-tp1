@@ -16,6 +16,10 @@ action="<?php if(isset($_POST['titre'])) {$update = $recette->update('recette', 
 ____________________
 
 
+Suis rendu dans recette-ingredient-edit
+Je pense que je dois faire une select afin que l'utilisateur puisse choisir quel ingrédient il veut changer
+
+Je viens de me rendre compte que c'est peut-être juste pour pouvoir ajouter et changer les OPTIONS d'ingrédient ce devoir...
 
 
 
