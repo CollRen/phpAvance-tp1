@@ -14,7 +14,7 @@ class CRUD extends PDO {
     
     public function selectWhere($table, $field, $where){
         $sql = "SELECT * FROM $table WHERE $field = $where";
-        $stmt = $this->query($sql);
+        $stmt = $this->query($sql);…
         return $stmt->fetchAll();
     }
 

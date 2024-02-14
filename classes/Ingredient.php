@@ -6,7 +6,6 @@ class Ingredient extends CRUD {
     private string $nom;
     private string $tableName;
     private string $urlPrefix;
-    public int $test;
 
     public function __construct(){
         parent::__construct('mysql:host=localhost;dbname=recettes;port=3306;charset=utf8', 'root', 'root');

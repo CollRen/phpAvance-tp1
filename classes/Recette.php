@@ -4,9 +4,10 @@ class Recette extends CRUD {
 
     private int $recetteId;
     private string $titre;
+    private string $description;
     private string $tempsPreparation;
     private string $tempsCuisson;
-    private string $tableName;
+
 
 
     public function __construct(){

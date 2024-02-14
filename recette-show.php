@@ -8,16 +8,10 @@ if(isset($_GET['id']) && $_GET['id']!=null){
     extract($selectId);
     
     $idRecette = $id;
-    
-
-/*     require_once('classes/Recette-has-ingredient.php');
-    $recetteHI = new RecetteHasIngredient;
-    $selectIdHI = $recette->selectId($_GET['id'], 'index');
-    extract($selectIdHI); */
 
 }else{
     
-    /* header('location:index.php'); */
+    header('location:index.php');
 }
 
 
