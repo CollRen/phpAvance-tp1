@@ -1,17 +1,17 @@
 <?php
 require_once('./classes/CRUD.php');
 class RecetteHasIngredient extends CRUD {
-    private int $recettehasIngredientId;
-    private string $recette_id_name;
-    private string $ingredient_id_name;
-    private string $unite_mesure_id_name;
-    private string $quantiteName;
+    private $recettehasIngredientId;
+    private $recette_id_name;
+    private $ingredient_id_name;
+    private $unite_mesure_id_name;
+    private $quantiteName;
     
-    private string $nom;
-    private string $tableName;
-    private string $urlPrefix;
-    private array $post;
-    private array $arrayToInsert;
+    private $nom;
+    private $tableName;
+    private $urlPrefix;
+    private $post;
+    private $arrayToInsert;
 
     public function __construct(){
         parent::__construct('mysql:host=localhost;dbname=recettes;port=3306;charset=utf8', 'root', 'root');

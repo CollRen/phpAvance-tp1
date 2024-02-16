@@ -4,9 +4,9 @@ class UMesure extends CRUD {
 
     public int $UMesureId;
     public string $nom;
-    private string $tableName;
-    private string $urlPrefix;
-    private array $listeUMesure;
+    private $tableName;
+    private $urlPrefix;
+    private $listeUMesure;
 
     public function __construct(){
         parent::__construct('mysql:host=localhost;dbname=recettes;port=3306;charset=utf8', 'root', 'root');

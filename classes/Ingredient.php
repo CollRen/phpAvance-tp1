@@ -1,11 +1,11 @@
 <?php
 require_once('./classes/CRUD.php');
 class Ingredient extends CRUD {  
-    public array $listeingredient;
-    private int $ingredientId;
-    private string $nom;
-    private string $tableName;
-    private string $urlPrefix;
+    public $listeingredient;
+    private $ingredientId;
+    private $nom;
+    private $tableName;
+    private $urlPrefix;
 
     public function __construct(){
         parent::__construct('mysql:host=localhost;dbname=recettes;port=3306;charset=utf8', 'root', 'root');
