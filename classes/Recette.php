@@ -2,7 +2,7 @@
 require_once('./classes/CRUD.php');
 class Recette extends CRUD {
 
-    private $recetteId;
+    private int $recetteId;
     private $titre;
     private $description;
     private $tempsPreparation;
