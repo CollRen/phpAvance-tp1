@@ -90,7 +90,7 @@ class CRUD extends PDO {
 
         $count = $stmt->rowCount();
         if($count >= 1){
-           return true; // header("location:$url.php");
+            header("location:index.php");
         }else{
             print_r($stmt->errorInfo());
         }
