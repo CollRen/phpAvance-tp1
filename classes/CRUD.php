@@ -14,7 +14,7 @@ class CRUD extends PDO {
     
     public function selectWhere($table, $field, $where){
         $sql = "SELECT * FROM $table WHERE $field = $where";
-        $stmt = $this->query($sql);…
+        $stmt = $this->query($sql);
         return $stmt->fetchAll();
     }
 
@@ -81,7 +81,7 @@ class CRUD extends PDO {
         return $sql;
     }
 
-    public function delete($table, $value, $url, $field = 'id'){
+    public function delete($table, $value, $field = 'id'){
         $sql = "DELETE FROM $table WHERE $field = :$field";
 
         $stmt = $this->prepare($sql);
@@ -89,8 +89,8 @@ class CRUD extends PDO {
         $stmt->execute();
 
         $count = $stmt->rowCount();
-        if($count == 1){
-            header("location:$url.php");
+        if($count >= 1){
+           return true; // header("location:$url.php");
         }else{
             print_r($stmt->errorInfo());
         }
