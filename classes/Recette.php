@@ -2,7 +2,7 @@
 require_once('./classes/CRUD.php');
 class Recette extends CRUD {
 
-    private int $recetteId;
+    private $recetteId;
     private $titre;
     private $description;
     private $tempsPreparation;
@@ -11,7 +11,7 @@ class Recette extends CRUD {
 
 
     public function __construct(){
-        parent::__construct('mysql:host=localhost;dbname=ecommerce;port=3306;charset=utf8', 'root', 'root');
+        parent::__construct('mysql:host=localhost;dbname=ecommerce;port=3306;charset=utf8', 'e2395944', 'oE99Yi8EHOIhG94Bil11');
     }
 
     public function getUMesureTempsTotal(){
